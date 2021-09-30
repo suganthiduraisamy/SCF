@@ -1,0 +1,53 @@
+Steps for Docker initialisation:
+
+Open remix from following link: 
+http://remix.ethereum.org/?#gist=d899cf4ecbc352bba1d9ba6c9c9db4d8&optimize=false&runs=200&evmVersion=null&version=soljson-v0.4.26+commit.4563c3fc.js
+
+1. Deploy LinkToken.sol Contract 
+
+2. Deploy Oracle.sol contract
+
+3. Ssh into boot node
+
+4. Cd chainlinknode
+
+5. Sudo vi .env
+
+6. Change ETH_CHAIN_ID to 692021
+
+7. Change LINK_CONTRACT_ADDRESS value from step 1
+
+8. Change ORACLE_CONTRACT_ADDRESS from Step 2
+
+9. Change ETH_URL to ws://{Elastic Ip}:9545
+
+10. Exit & Save the file
+
+11. Sudo docker-compose up. (This command will fail because Postgres is not yet initialised)
+
+12. Sudo docker-compose up (This Time it will work)
+
+13. Open Chain link view in the browser using: http://{ElasticIp}:6688
+
+14. Login using following credentials: capstone@gl.com / password
+
+15. Go to Keys section in the top and copy address from the bottom section
+
+16. Open Remix and navigate to LinkToken and open transfer method.
+
+17. Pass the address (received in step 15) and value as: 135000000000000000000
+
+18. Open meta mask and send ether to the address (received in step 15)
+
+19. Open the Job and select New Job section
+
+20. Select JSON format and use the job json define in the Job.txt file
+
+21. Select JOB id as a result from step 20. It appears in green colour.
+
+22. In the Oracle contract select setFullfillment method. In this pass address received in step 15 and second value as true
+
+23. Now we need to load contract from which we want to send the request. 
+
+24. We need to load the contract deployed in Step 23 with Link Token contract > Transfer method
+ 
